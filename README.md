@@ -27,8 +27,22 @@
 ‣ node_modules 과 package-lock.json 지우고 npm i 실행하면 다시 설치되니 지워져도 걱정 놉!
 
 ## • babel  
-우리가 작성한 최신 자바스크립트를 모두가 이해할 수 있는 안정된 자바스크립트로 바꿔준다. 
+‣ 우리가 작성한 최신 자바스크립트를 모두가 이해할 수 있는 안정된 자바스크립트로 바꿔준다. 
 
 ## • babel.config.json  
-• preset : babel을 위한 엄청 거대한 플러그인  
+‣ preset : babel을 위한 엄청 거대한 플러그인  
 → 가장 유명한 건 preset-env : 최신 자바스크립트 구문 사용할 수 있게 해줌
+
+## • server
+‣ 24시간 내내 온라인에 연결된 컴퓨터라 할 수 있음!  
+‣ 항상 우리를 listening하고 있어야 한다.  
+
+## • callback  
+‣ 서버가 시작될 때 작동하는 함수이다.  
+‣ callback 작성하기 전에 서버에게 어떤 포트를 listening할지 얘기해 줘야 한다.
+
+## • GET 
+‣ HTTP method
+
+## • http request
+‣ 웹사이트에 접속하고 서버에 정보를 보내는 방법이다.
