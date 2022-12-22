@@ -63,3 +63,11 @@
 ## • morgan  
 ‣ morgan 함수를 호출하면, 내가 설정한 대로 middleware를 return 해준다.  
 ‣ morgan은 GET, path, status code 이 모든 정보를 가지고 있다.  
+
+## Router
+‣ 컨트롤러와 URL의 관리를 쉽게 해준다.  
+(= 미니 어플리케이션 만들어 줌)
+
+
+## export
+‣ 파일은 한 가지 default export 밖에 가질 수 없다.
