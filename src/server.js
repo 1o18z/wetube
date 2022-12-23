@@ -2,7 +2,7 @@ import express from "express";
 // const express = require("express");의 최신 버전이 윗줄 코드
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
-import videoRouter from './routers/video.Router';
+import videoRouter from './routers/videoRouter';
 import userRouter from './routers/userRouter';
 
 const PORT = 4000;
