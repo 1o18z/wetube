@@ -1,16 +1,10 @@
-export const trending = (req, res) => res.send("Home Page Videos");
-export const see = (req, res) => {
-    console.log(req.params.id);
-    return res.send("see");
-}
-
-export const edit = (req, res) => {
-    console.log(req.params);
-    return res.send("edit");
-}
+export const trending = (req, res) => res.render("home", { pageTitle: "Home" });
+// 첫 번째 인자는 view의 이름 , 두 번째 인자는 템플릿에 보낼 변수
+export const see = (req, res) => res.render("watch");
+export const edit = (req, res) => res.render("edit");
 export const search = (req, res) => res.send("Search");
 export const upload = (req, res) => res.send("Upload");
-export const deleteVideo = (req, res) =>{
+export const deleteVideo = (req, res) => {
     console.log(req.params);
     return res.send("deleteVideo");
 }
