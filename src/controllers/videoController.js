@@ -1,4 +1,34 @@
-export const trending = (req, res) => res.render("home", { pageTitle: "Home" });
+
+export const trending = (req, res) => {
+    const videos = [
+        {
+            title: "First Video",
+            rating: 5,
+            comments:2,
+            createdAt: "2 minutes ago",
+            views: 59,
+            id:1,
+        },
+        {
+            title: "Second Video",
+            rating: 5,
+            comments:2,
+            createdAt: "2 minutes ago",
+            views: 59,
+            id:1,
+        },
+        {
+            title: "Third Video",
+            rating: 5,
+            comments:2,
+            createdAt: "2 minutes ago",
+            views: 59,
+            id:1,
+        },
+    ];
+
+    return res.render("home", { pageTitle: "Home", videos})
+};
 // 첫 번째 인자는 view의 이름 , 두 번째 인자는 템플릿에 보낼 변수
 export const see = (req, res) => res.render("watch");
 export const edit = (req, res) => res.render("edit");
