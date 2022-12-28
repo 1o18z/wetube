@@ -1,14 +1,14 @@
 extends base.pug
 include mixins/video
-// include를 안 하면 video는 함수가 아니라는 에러 뜸
+//- include를 안 하면 video는 함수가 아니라는 에러 뜸
 
 block content 
     h2 Welcome!!
-    each potato in videos 
-        +video(potato)
-        // potato = video.pug의 info
-        // potato는 videos라는 array의 한 item
-        // each x in [1, 2, 3, 4, 5] 이렇게 써도 됨
+    each video in videos 
+        +video(video)
+        //- potato = video.pug의 괄호 안의 video들
+        //- potato는 videos라는 array의 한 item
+        //- each x in [1, 2, 3, 4, 5] 이렇게 써도 됨
                 
     else 
             li Sorry nothing found.

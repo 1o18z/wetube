@@ -1,4 +1,9 @@
 extends base.pug
 
 block content 
-    h1 Watch Video!
+        //- h2 #{video.views}
+        h2 #{video.views} #{video.views == 1 ? "view" : "views" }
+        h2 #{video.rating}/5 점
+        a(href=`${video.id}/edit`) Edit Video &rarr;
+  
+

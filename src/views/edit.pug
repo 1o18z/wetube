@@ -1,4 +1,11 @@
 extends base.pug
 
 block content 
-    h1 Edit Video!
+    h4 Change Title of video
+    form(method="POST") 
+
+        input(name="title", placeholder="Video Title", value=video.title, required)
+        input(value="Save", type="submit")
+
+    //- 기본값 GET 말고 POST로 해주면, 이동했을 때 url은 같지만 POST 방식 사용해 이동함을 알 수 있다
+    //- form 안에 action=""을 넣어주면, 이 데이터들을 특정 url로 보낼 수 있다

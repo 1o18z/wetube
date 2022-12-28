@@ -83,17 +83,37 @@
 ‣ express는 이미 템플릿을 렌더링하도록 설정되어 있으므로 res.render을 이용해 pug 파일의 이름을 전해주면 된다.  
 (-> const hi = (req,res) => res.render("파일이름"));  
 ‣ server.js의 @줄을 통해 pug의 경로 지정해준다.  
-(= 렌더링할 때 찾아야 할 경로)  
-‣ 예시로 title pageTitle 이렇게 쓰면 그냥 텍스트가 되지만, title=pageTitle이라 쓰면 변수로 인식한다.  
-(->하지만 다른 text와 섞어서 쓸 때는 #{pageTitle} 사용)
+(= 렌더링할 때 찾아야 할 경로)    
+
+ex) title pageTitle 이렇게 쓰면 그냥 텍스트가 되지만, title=pageTitle이라 쓰면 변수로 인식  
+(-> 하지만 다른 text와 섞어서 쓸 때는 #{pageTitle} 사용)
 
 ## • Iteration  
 ‣ elements의 list를 보여준다.  
-(each in 이런거. 댓글, 비디오 등 리스트 보여줄 때 사용)
+(each in 이런거. 댓글, 비디오 등 리스트 보여줄 때 사용)  
 ‣ in 다음에 오는 변수는 컨트롤러의 변수 이름과 같아야 한다.  
 
 ## • Mixin
 ‣ mixin은 partial이긴 한데 데이터를 받을 수 있는 partial  
-(= 똑똑한 partial)
-‣ 반복해서 등장하는 HTML 블록이 필요하고, 블록 형태를 지니지만 서로 다른 데이터를 가져야 할 때 사용
+(= 똑똑한 partial)  
+‣ 반복해서 등장하는 HTML 블록이 필요하고, 블록 형태를 지니지만 서로 다른 데이터를 가져야 할 때 사용한다.
+
+## • watch.pug  
+‣ watch.pug의 a(href="/edit") 줄에서, 그냥 edit을 쓰면 /videos/edit으로 이동하고, /edit을 써야 /edit으로 이동한다.  
+=> absolute와 relative url의 차이점  
+앞에 /를 넣으면, 내가 어디든 상관 없이 root경로 + /edit,  
+/를 지우면 relative url이 된다. (현재 경로 뒤에 /edit이 붙음)    
+
+ex) 예를 들어  a(href=`${video.id}/edit`)라고 쓰면 localhost:4000/videos/3/edit 로 이동하고, a(href=`/${video.id}/edit`)라고 쓰면 localhost:4000/3/edit 로 이동 
+
+(=> 기본값으로 method="GET")  
+‣ GET은 언제 쓸까?  
+-> 구글이나 네이버에서 뭔가를 검색할 때, 그 검색어가 주소창에 포함되어 있을 거임 (비디오 검색하거나 할 때 사용)
+‣ POST는 언제 쓸까?  
+-> 파일 보내거나 database에 있는 값을 바꾸는 뭔가를 보낼 때 사용  
+(웹사이트에 로그인 할 때도 POST 사용)  
+
+
+## • edit.pug  
+‣ input에 name을 넣어주지 않으면 req.body에서 데이터를 볼 수 없다.  
 
