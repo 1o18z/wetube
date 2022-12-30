@@ -117,3 +117,16 @@ ex) 예를 들어  a(href=`${video.id}/edit`)라고 쓰면 localhost:4000/videos
 ## • edit.pug  
 ‣ input에 name을 넣어주지 않으면 req.body에서 데이터를 볼 수 없다.  
 
+## • MongoDB  
+간단하게 작동시킬 수 잌ㅆ고 초보자들도 사용 가능  
+문서기반이다.(document-based database)
+database도 object로 생각한다.  
+JSON-like-document로 저장할 수 있기 때문에, 초심자들도 사용하기 쉽다.  
+
+
+## • Mongoose  
+node.js와 mongoDB를 이어주는 다리 역할  
+
+on과 once의 차이점  
+-> on은 여러번 계속 발생시킬 수 있다. (클릭같은 이벤트)  
+->once는 오로지 한번만 발생한다.  
