@@ -118,15 +118,86 @@ ex) 예를 들어  a(href=`${video.id}/edit`)라고 쓰면 localhost:4000/videos
 ‣ input에 name을 넣어주지 않으면 req.body에서 데이터를 볼 수 없다.  
 
 ## • MongoDB  
-간단하게 작동시킬 수 잌ㅆ고 초보자들도 사용 가능  
+‣ 간단하게 작동시킬 수 잌ㅆ고 초보자들도 사용 가능  
 문서기반이다.(document-based database)
-database도 object로 생각한다.  
-JSON-like-document로 저장할 수 있기 때문에, 초심자들도 사용하기 쉽다.  
+‣ database도 object로 생각한다.  
+‣ JSON-like-document로 저장할 수 있기 때문에, 초심자들도 사용하기 쉽다.  
 
 
 ## • Mongoose  
-node.js와 mongoDB를 이어주는 다리 역할  
+‣ node.js와 mongoDB를 이어주는 다리 역할  
 
-on과 once의 차이점  
+‣ on과 once의 차이점  
 -> on은 여러번 계속 발생시킬 수 있다. (클릭같은 이벤트)  
 ->once는 오로지 한번만 발생한다.  
+
+## • callback 
+‣ 무언가가 발생하고 난 다음 호출되는 function을 말한다.  
+‣ callback을 사용하면 아무것도 return 되지 않아야 한다.  
+
+ex) 예를 들어 아래의 코드를 실행시키면
+```
+export const home = (req, res) =>{
+  console.log("One")
+  Video.find({}, (error, videos) => {
+    console.log("Two")
+  });
+    console.log("Three");
+}
+```
+```  
+One
+Three
+Two
+``` 
+위처럼 출력이 되는 걸 보아, callback은 특정 코드를 마지막에 실행되게 할 수 있다. 
+(= javascript는 기다리는 기능이 없다. 위에서부터 순서대로 실행한 건데 작업별로 시간이 달라서 순서가 바뀌는 거) 
+
+## • promise 
+‣ callback의 최신 버전이라 볼 수 있다.  
+‣ await를 앞에 적으면, find는 내가 callback을 필요로 하지 않는 다는 걸 알게 된다.  
+-> 따라서 find는 찾아낸 비디오를 바로 출력해준다.  
+
+## • await  
+‣ await가 database를 기다려 준다.  
+‣ async와 await는 javascript가 어디서 어떻게 기다리는지 바로 알 수 있다. 
+‣ 코드 규칙상 await는 function 안에서만 사용이 가능하고, 해당 function이 asynchronous일 때만 가능하다.  
+(=> 그래서 앞에 async라고 써줌)
+‣ await에서 에러가 생기면 다 날아가 버리고 아무것도 실행되지 않는다.  
+
+## • create  
+```
+ const video = new Video({
+        title,
+        description,
+        createAt: Date.now(),
+        hashtags: hashtags.split(",").map((word) => `#${word}`),
+        meta:{
+            views:0,
+            rating:0,
+        },
+    });
+    await video.save();
+    return res.redirect("/");
+```
+위 코드와 아래 코드와 같다.  
+```
+await Video.craete({
+        title,
+        description,
+        createAt: Date.now(),
+        hashtags: hashtags.split(",").map((word) => `#${word}`),
+        meta:{
+            views:0,
+            rating:0,
+        },
+    });
+    return res.redirect("/");
+})
+```
+-> 아래 코드는 위 코드와 기능은 같지만 javascript object를 만드는 과정을 우리가 하지 않아도 된다. (자동으로 해줌)  
+(=> 즉, 방식은 save와 create 방식 두 가지가 있다.)  
+
+## • maxLength, minLength  
+‣ upload.pug의 input의 max/minLength은 사용자를 위한 거고,  
+Video.js의 max/minLength는 database를 위한 거로 둘 다 해줘야 한다.  
