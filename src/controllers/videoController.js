@@ -2,9 +2,10 @@ import { reset } from "nodemon";
 import { formatHashtags } from "../models/Video";
 import Video from "../models/Video";
 import { format } from 'path';
+import { KeyObject } from "crypto";
 
 export const home = async (req, res) => {
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({createAt: "asc"});
     console.log(videos); // 저장된 database들 출력
     return res.render("home", { pageTitle: "Home", videos });
 };
@@ -72,4 +73,20 @@ export const deleteVideo = async (req, res) => {
     console.log(id);
     return res.redirect("/");
 
+}
+
+export const search = async (req, res) => {
+    const { keyword } = req.query;
+    let videos = [];
+    // 여기서 const videos를 한다면 if문 밖에 있는 videos는 undefined가 됨 
+    if(keyword){
+        videos = await Video.find({
+            title: { 
+                $regex: new RegExp(`${keyword}$`, "i"),
+                                // 여기서 i는 대소문자 구별하지 말라는 뜻
+            },
+        });
+        console.log(videos);
+    }
+    return res.render("search", {pageTitle: "Search", videos});
 }

@@ -213,8 +213,15 @@ Video.js의 max/minLength는 database를 위한 거로 둘 다 해줘야 한다.
 ‣ middleware는 무조건 model이 생성되기 전에 만들어야 한다.    
 
 ## • db 내용 삭제
-‣ [cmd]
-> mongosh
-> use wetube
-> db.videos.remove({})  
->
+-> [cmd]  
+‣  mongosh  
+‣  use wetube  
+‣  db.videos.remove({})  
+
+form 내용은 req.body
+id는 req.params 
+URL의 정보는 req.query
+
+## schema  
+schema는 validation을 위한 모든 것 
+static function과 middleware를 생성해서 쓸 수 있다.
