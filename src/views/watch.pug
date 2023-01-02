@@ -2,8 +2,12 @@ extends base.pug
 
 block content 
         //- h2 #{video.views}
-        h2 #{video.views} #{video.views == 1 ? "view" : "views" }
-        h2 #{video.rating}/5 점
+        div
+                p=video.description
+                small=video.createAt
+
         a(href=`${video.id}/edit`) Edit Video &rarr;
+        br
+        a(href=`${video.id}/delete`) Delete Video &rarr;
   
 

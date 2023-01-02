@@ -201,3 +201,20 @@ await Video.craete({
 ## • maxLength, minLength  
 ‣ upload.pug의 input의 max/minLength은 사용자를 위한 거고,  
 Video.js의 max/minLength는 database를 위한 거로 둘 다 해줘야 한다.  
+
+## • exists  
+‣ videoControlller.js의 postEdit 부분의 findById를 exists로 변경  
+( => video object를 받는 대신 true, false를 받겠다는 것) 
+-> postEdit에서는 단순히 영상이 존재하는지만 확인하면 되기 때문에 exists로 id를 받지 않고, filter를 받아 존재 여부를 판단한다.     
+‣ 그럼 getEdit도 exists로 받는게 좋을까?  
+-> getEdit은 object를 통해 edit template로 보내줘야 하기 때문에 video object가 필요하므로 findById()가 더 적합하다.  
+
+## • middleware  
+‣ middleware는 무조건 model이 생성되기 전에 만들어야 한다.    
+
+## • db 내용 삭제
+‣ [cmd]
+> mongosh
+> use wetube
+> db.videos.remove({})  
+>
