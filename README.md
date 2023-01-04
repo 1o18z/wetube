@@ -227,3 +227,9 @@ URL의 정보는 req.query
 ## schema  
 ‣ schema는 validation을 위한 모든 것 
 ‣ static function과 middleware를 생성해서 쓸 수 있다.
+
+## DeprecationWarning
+에러 아님!! 경고!!
+오래된 기능을 쓰고 있으니까 업데이트 하라고 알려주는 경고  
+(여기서는 userController에서 unique:true 써서 경고 뜸)
+꼭 고칠 필요는 없지만 경고 뜨지 않게 하려고 db.js에 useCreateIndex:true 추가함 (새로운 버전 추가하는 코드)
