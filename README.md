@@ -118,7 +118,7 @@ ex) 예를 들어  a(href=`${video.id}/edit`)라고 쓰면 localhost:4000/videos
 ‣ input에 name을 넣어주지 않으면 req.body에서 데이터를 볼 수 없다.  
 
 ## • MongoDB  
-‣ 간단하게 작동시킬 수 잌ㅆ고 초보자들도 사용 가능  
+‣ 간단하게 작동시킬 수 있고 초보자들도 사용 가능  
 문서기반이다.(document-based database)
 ‣ database도 object로 생각한다.  
 ‣ JSON-like-document로 저장할 수 있기 때문에, 초심자들도 사용하기 쉽다.  
@@ -126,6 +126,8 @@ ex) 예를 들어  a(href=`${video.id}/edit`)라고 쓰면 localhost:4000/videos
 
 ## • Mongoose  
 ‣ node.js와 mongoDB를 이어주는 다리 역할  
+(javascript로 적으면, mongoose가 mongoDB에게 전달해줌)
+‣ mongoDB와 상호작용하기 위해 mongoose 사용
 
 ‣ on과 once의 차이점  
 -> on은 여러번 계속 발생시킬 수 있다. (클릭같은 이벤트)  
@@ -155,7 +157,7 @@ Two
 
 ## • promise 
 ‣ callback의 최신 버전이라 볼 수 있다.  
-‣ await를 앞에 적으면, find는 내가 callback을 필요로 하지 않는 다는 걸 알게 된다.  
+‣ await를 앞에 적으면, find는 내가 callback을 필요로 하지 않는다는 걸 알게 된다.  
 -> 따라서 find는 찾아낸 비디오를 바로 출력해준다.  
 
 ## • await  
@@ -182,7 +184,7 @@ Two
 ```
 위 코드와 아래 코드와 같다.  
 ```
-await Video.craete({
+await Video.create({
         title,
         description,
         createAt: Date.now(),
@@ -223,5 +225,5 @@ id는 req.params
 URL의 정보는 req.query
 
 ## schema  
-schema는 validation을 위한 모든 것 
-static function과 middleware를 생성해서 쓸 수 있다.
+‣ schema는 validation을 위한 모든 것 
+‣ static function과 middleware를 생성해서 쓸 수 있다.
