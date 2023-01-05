@@ -229,7 +229,39 @@ URL의 정보는 req.query
 ‣ static function과 middleware를 생성해서 쓸 수 있다.  
 
 ## • DeprecationWarning
-‣ 에러 아님!! 경고!!
+‣ 에러 아님!! 경고!!  
 ‣ 오래된 기능을 쓰고 있으니까 업데이트 하라고 알려주는 경고  
-(여기서는 userController에서 unique:true 써서 경고 뜸)
+(여기서는 userController에서 unique:true 써서 경고 뜸)  
 ‣ 꼭 고칠 필요는 없지만 경고 뜨지 않게 하려고 db.js에 useCreateIndex:true 추가함 (새로운 버전 추가하는 코드)
+
+## • session  
+‣ 세션은 서버측에서 제공해주는 데이터
+(= 브라우저를 기억하는 방식 중 하나)  
+‣ 백엔드와 브라우저가 서로 정보를 알고 있어야 한다.  
+‣ router 앞에 초기화  
+‣ 서버 종료했다가 재시작하면 세션 다 사라진다.  
+-> express가 세션을 메모리에 저장하고 있어서(계속 잊어버림)   
+‣ 브라우저마다 서로 다른 세션  
+
+    
+
+❥ middleware는 express-session라는 모듈로부터 주어진다.  
+❥ middleware는 브라우저가 우리의 backend와 상호작용할 때마다 session이라는 middleware가 브라우저에 cookie를 전송한다.  
+❥ cookie는 backend가 내 브라우저에 주는 정보로, 정해진 규칙이 있어서 매번 backend에 request 할 때 브라우저는 알아서 그 request에 cookie를 덧붙인다.(때문에 내가 따로할 것은 없음)  
+❥ 브라우저는 cookie로 뭘 할지, 어디에 넣을지 다 알고있다.  
+❥ 브라우저는 우리가 매번 backend localhost에 있는 URL로 request를 보낼 때마다 cookie가 request랑 같이 전송된다.
+
+## • cookie  
+‣ 클라이언트측에서 저장하고 사용하는 데이터  
+‣ cookie에는 어떤 정보든 넣을 수 있다.   
+‣ cookie를 받고 보내는 과정에서 사용자는 아무것도 안 해도 된다.(자동적으로 해줌)
+
+## • session store  
+‣ 우리가 session을 저장하는 곳  
+‣ 우리가 매번 코드를 저장하면 서버 재시작 되는데, session store는 사라짐
+(테스트를 위한 저장소)
+
+
+
+
+

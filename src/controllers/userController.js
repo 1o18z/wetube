@@ -58,9 +58,9 @@ export const postLogin = async (req, res) => {
             errorMessage: "Wrong password",
         });
     }
-    // 계젖ㅇ 존재하는지 체크
-    // 패스워드 옳은지 체크
-    res.end();
+    req.session.loggedIn = true;
+    req.session.user = user;    // user를 세션에 저장 (로그인하고 세션DB 확인해보면 쿠키 id인 세션 id가 있는 걸 볼 수 있음)
+    return res.rendirect("/");
 };
 export const logout = (req, res) => res.send("Log out");
 export const see = (req, res) => res.send("See User");
