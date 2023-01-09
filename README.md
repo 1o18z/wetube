@@ -262,6 +262,8 @@ URL의 정보는 req.query
 ‣ cookie를 받고 보내는 과정에서 사용자는 아무것도 안 해도 된다.(자동적으로 해줌)
 ‣ session ID는 cookie에 저장되지만 session data는 서버 쪽에 저장된다.
 ‣ 서버에 저장되는 default session storage는 실제 사용하기 위해 있는 건 아니고 MemoryStore이다.
+‣ 아무리 삭제해도 새로고침 할 때마다 쿠키는 새로 생성됨!!
+‣ 사용자에게 쿠키를 주고, session은 DB에 저장
 
 ## • session store  
 ‣ 우리가 session을 저장하는 곳  
@@ -276,5 +278,55 @@ URL의 정보는 req.query
 => 왜냐면 더이상 로그인 정보가 서버에 있지 않고 MongoDB에 있어서!!  
 (mongoDB의 store 옵션 하나로 세션이 서버에 저장될지 mongoDB에 저장될지 결정 되는게 너무 신기하당.. store 옵션 지우면 재시작 할 때마다 메모리 지워짐!!)
 
+### • resave & saveUninitialized  
+‣ 새로운 세션이 있는데, 수정된 적 없으면 uninitialized(초기화되지 않은)
+‣ session은 한 곳에서만 수정 가능   
+-> userController의
+```
+req.session.loggedIn = true;
+req.session.user = user;
+``` 
+위 두 줄이 우리가 실제로 session을 initialize(초기화)하는 부분  
+‣ sever.js에 resave와 saveUninitialized를 false로 해서 이제 backend가 로그인한 사용자에게만 cookie를 주도록 설정됐다.
+
+### • cookie의 property  
+‣ secret : 우리가 cookie에 sign할 때 사용하는 string  
+(쿠키에 sign하는 이유? 우리 backend가 cookie를 줬다는 걸 보여주기 위함)  
+secret은 string으로 작성하는데 쓸 때는 길고 어렵게 만들어야 한다.  
+-> 이 string을 가지고 cookie를 sign하고 우리가 만든 것임을 증명할 수 있음  
+
+‣ Domain : 이 cookie를 만든 backend가 누구인지 알려준다.  
+브라우저는 Domain에 따라 cookie를 저장하도록 되어 있고,  
+cookie는 Domain에 있는 backend로만 전송된다.  
+(Domain은 cookie가 어디서 왔는지, 어디로 가야하는지 알려줌)  
+
+‣ path : 단순히 url  
+
+‣ Expires : HTTP 타임스탬프로 기록된 cookie의 최대 생존 시간(수명) 
+-> 만료 날짜를 지정하지 않으면 sessoin cookie로 설정되고, 컴퓨터를 재시작 하거나 프로그램을 종료하면 session이 사라짐  
+
+‣ Max-Age : session이 언제 만료되는지(얼마동안 유지할지) 알려주는 것  
+-> server.js의 session 옵션에 cookie를 이용해 변경 가능  
+ex) cookie:{ maxAge: 20000} 이라하면, 20초 뒤에 session 삭제
 
 
+### • secret & store  
+‣ 다른 사람이 보면 안됨(보안 위험)  
+-> .env 파일을 만들어서 비밀로 해야하는 API key, url 등을 넣어줌
+
+### • dotenv  
+‣ .env 파일을 읽고, 각각의 변수들을 process.env 안에 넣는다.  
+‣ 파이썬, 자바스크립트 외에 다른 언어로도 구현되어 있다.  
+-> require("dotenv").config(); 이 줄은 최대한 가장 먼저 추가해줘야 한다.
+(추가하고 콘솔로 secret이랑 url 찍어보니까 undefined가 안 뜨고 .env 파일에 적어준 내용이 출력됨!!)  
+
+-> server.js에 require("dotenv").config() 추가하고 콘솔 찍으니까 적은 내용이 잘 출력됐는데, 'db.js에 DB_URL이 없다'는 에러가 출력 됐다  
+-> 그래서 db.js에서 콘솔 찍었는데도 작동하지 않음 (undefined가 나옴)
+=> 이유는?! require("dotenv").config()를 가장 먼저 실행하지 않아서다!!  
+-> 맨 윗줄에 적었는데 무슨 소리지?
+-> package.json 파일에 scripts의 dev를 보면, 프로그램을 실행했을 때 init.js가 가장 먼저 실행되게 되어있다
+-> 그래서 require("dotenv").config()를 init.js의 맨 윗줄로 옮겨줬더니 해결! 되어야 하지만 아직도 작동되지 않는다  
+-> import 방식이 달라서 그럼 (require이나 import 두 종류로 import 해서)  
+(require 방식을 사용하고 싶으면 dotenv를 사용하고 싶은 모든 파일에 require을 추가해야 한다 -> 너무 번거로움)
+=> require 방식을 import로 수정! => import "dotenv/config" 
+=>> 해결!!!
