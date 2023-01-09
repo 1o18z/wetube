@@ -329,4 +329,18 @@ ex) cookie:{ maxAge: 20000} 이라하면, 20초 뒤에 session 삭제
 -> import 방식이 달라서 그럼 (require이나 import 두 종류로 import 해서)  
 (require 방식을 사용하고 싶으면 dotenv를 사용하고 싶은 모든 파일에 require을 추가해야 한다 -> 너무 번거로움)
 => require 방식을 import로 수정! => import "dotenv/config" 
-=>> 해결!!!
+=>> 해결!!!  
+
+### • scope (로그인 중 github 가져올 때 사용)
+‣ User에게서 얼마나 많이 정보를 읽어내고 어떤 정보를 가져올 것에 대한 것
+‣ 내가 어떤 정보를 요청하느냐에 따라 user는 승인을 받게 되고 github는 나에게 정보를 접근할 수 있는 토큰을 준다.  
+
+### • fetch  
+‣ fetch('url')로 다른 서버를 통해 데이터를 가져올 수 있다.
+(하지만 res.body에 담겨있는 날 것의 url로는 제대로 된 객체 받아올 수 X)
+-> 그래서 .json 함수가 response의 스트림을 가져와 끝까지 읽고, res.body의 텍스트를 promise의 형태로 반환한다. (promise는 주로 서버에서 받아온 데이터를 화면에 표시할 때 사용)  
+-> 다른 서버에서 데이터를 가져와 object 형식으로 받아온다.  
+ex) {"coord":{"lon":139.01,"lat":35.02},"weather":[{"id":800,"main":"Clear","description":"clear sky","icon":"01n"}]  
+
+### • fetch 
+‣ 우리는 fetch가 필요한데 fetch는 서버엔 없고 브라우저에만 존재하니까 node-fetch라는 패키지 사용
