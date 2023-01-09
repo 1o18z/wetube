@@ -8,7 +8,7 @@
 ‣ json은 프로그래머가 파일에 정보를 저장하기 위해 만든 방식 중 하나이다. 
 (= node.js의 정보 저장)  
 ‣ nodeJS의 json 이름은 무조건 package.json이다.  
-→ package.json은 그냥 텍스트 파일이므로 수정해도 괜찮음
+→ package.json은 그냥 텍스트 파일이므로 수정해도 괜찮음  
 ‣ npm i를 실행할 때는 package.json을 닫고 실행하는 걸 권장한다.  
 (npm이 자동으로 package.json을 수정해서 에러가 날 수도)
 
@@ -75,11 +75,11 @@
 ## • pug
 ‣ pug는 템플릿 엔진  
 (= 템플릿을 이용해 뷰를 만드는 걸 도움)  
-‣ 파일을 받아서 모두 체크하고 자바스크립트를 실행한다.
-‣ 깔끔한 html을 작성하도록 해준다.
-‣ 우리의 html에 자바스크립트를 포함시킬 수 있다.
-‣ 우리가 반복하지 않아도 한 파일로 모든 템플릿을 업데이트 할 수 있다.
-태그를 쓰지 않아도 띄어쓰기와 탭으로 구분 된다.  
+‣ 파일을 받아서 모두 체크하고 자바스크립트를 실행한다.  
+‣ 깔끔한 html을 작성하도록 해준다.  
+‣ 우리의 html에 자바스크립트를 포함시킬 수 있다.  
+‣ 우리가 반복하지 않아도 한 파일로 모든 템플릿을 업데이트 할 수 있다.  
+태그를 쓰지 않아도 띄어쓰기와 탭으로 구분 된다.    
 ‣ express는 이미 템플릿을 렌더링하도록 설정되어 있으므로 res.render을 이용해 pug 파일의 이름을 전해주면 된다.  
 (-> const hi = (req,res) => res.render("파일이름"));  
 ‣ server.js의 @줄을 통해 pug의 경로 지정해준다.  
@@ -108,7 +108,8 @@ ex) 예를 들어  a(href=`${video.id}/edit`)라고 쓰면 localhost:4000/videos
 
 (=> 기본값으로 method="GET")  
 ‣ GET은 언제 쓸까?  
--> 구글이나 네이버에서 뭔가를 검색할 때, 그 검색어가 주소창에 포함되어 있을 거임 (비디오 검색하거나 할 때 사용)
+-> 구글이나 네이버에서 뭔가를 검색할 때, 그 검색어가 주소창에 포함되어 있을 거임   
+(비디오 검색하거나 할 때 사용)  
 ‣ POST는 언제 쓸까?  
 -> 파일 보내거나 database에 있는 값을 바꾸는 뭔가를 보낼 때 사용  
 (웹사이트에 로그인 할 때도 POST 사용)  
@@ -119,14 +120,14 @@ ex) 예를 들어  a(href=`${video.id}/edit`)라고 쓰면 localhost:4000/videos
 
 ## • MongoDB  
 ‣ 간단하게 작동시킬 수 있고 초보자들도 사용 가능  
-문서기반이다.(document-based database)
+문서기반이다.(document-based database)  
 ‣ database도 object로 생각한다.  
 ‣ JSON-like-document로 저장할 수 있기 때문에, 초심자들도 사용하기 쉽다.  
 
 
 ## • Mongoose  
 ‣ node.js와 mongoDB를 이어주는 다리 역할  
-(javascript로 적으면, mongoose가 mongoDB에게 전달해줌)
+(javascript로 적으면, mongoose가 mongoDB에게 전달해줌)  
 ‣ mongoDB와 상호작용하기 위해 mongoose 사용
 
 ‣ on과 once의 차이점  
@@ -152,7 +153,7 @@ One
 Three
 Two
 ``` 
-위처럼 출력이 되는 걸 보아, callback은 특정 코드를 마지막에 실행되게 할 수 있다. 
+위처럼 출력이 되는 걸 보아, callback은 특정 코드를 마지막에 실행되게 할 수 있다.   
 (= javascript는 기다리는 기능이 없다. 위에서부터 순서대로 실행한 건데 작업별로 시간이 달라서 순서가 바뀌는 거) 
 
 ## • promise 
@@ -162,9 +163,9 @@ Two
 
 ## • await  
 ‣ await가 database를 기다려 준다.  
-‣ async와 await는 javascript가 어디서 어떻게 기다리는지 바로 알 수 있다. 
+‣ async와 await는 javascript가 어디서 어떻게 기다리는지 바로 알 수 있다.   
 ‣ 코드 규칙상 await는 function 안에서만 사용이 가능하고, 해당 function이 asynchronous일 때만 가능하다.  
-(=> 그래서 앞에 async라고 써줌)
+(=> 그래서 앞에 async라고 써줌)  
 ‣ await에서 에러가 생기면 다 날아가 버리고 아무것도 실행되지 않는다.  
 
 ## • create  
@@ -206,7 +207,7 @@ Video.js의 max/minLength는 database를 위한 거로 둘 다 해줘야 한다.
 
 ## • exists  
 ‣ videoControlller.js의 postEdit 부분의 findById를 exists로 변경  
-( => video object를 받는 대신 true, false를 받겠다는 것) 
+( => video object를 받는 대신 true, false를 받겠다는 것)   
 -> postEdit에서는 단순히 영상이 존재하는지만 확인하면 되기 때문에 exists로 id를 받지 않고, filter를 받아 존재 여부를 판단한다.     
 ‣ 그럼 getEdit도 exists로 받는게 좋을까?  
 -> getEdit은 object를 통해 edit template로 보내줘야 하기 때문에 video object가 필요하므로 findById()가 더 적합하다.  
@@ -243,7 +244,11 @@ URL의 정보는 req.query
 -> express가 세션을 메모리에 저장하고 있어서(계속 잊어버림)   
 ‣ 브라우저마다 서로 다른 세션  
 
-    
+
+## • session middleware  
+‣ store라는 옵션 존재  
+(-> default로 설정된 것과는 다른 store를 설정할 수 있다는)
+ 
 
 ❥ middleware는 express-session라는 모듈로부터 주어진다.  
 ❥ middleware는 브라우저가 우리의 backend와 상호작용할 때마다 session이라는 middleware가 브라우저에 cookie를 전송한다.  
@@ -255,6 +260,8 @@ URL의 정보는 req.query
 ‣ 클라이언트측에서 저장하고 사용하는 데이터  
 ‣ cookie에는 어떤 정보든 넣을 수 있다.   
 ‣ cookie를 받고 보내는 과정에서 사용자는 아무것도 안 해도 된다.(자동적으로 해줌)
+‣ session ID는 cookie에 저장되지만 session data는 서버 쪽에 저장된다.
+‣ 서버에 저장되는 default session storage는 실제 사용하기 위해 있는 건 아니고 MemoryStore이다.
 
 ## • session store  
 ‣ 우리가 session을 저장하는 곳  
@@ -262,6 +269,12 @@ URL의 정보는 req.query
 (테스트를 위한 저장소)
 
 
+### ‣ 그럼 session은 어떻게 만들까??  
+=> 브라우저가 우리의 backend를 방문할 때 만들어진다.    
+(페이지 새로고침하고 터미널에 db.sessions.find({}) 입력하면 session이 생긴거 확인 가능)  
+-> db.js에 'store: MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/wetube"})'를 추가했는데, 이로 인해 이제 서버를 재시작 해도 DB에 기억되어짐(로그인 상태 유지)!!!!! 와우  
+=> 왜냐면 더이상 로그인 정보가 서버에 있지 않고 MongoDB에 있어서!!  
+(mongoDB의 store 옵션 하나로 세션이 서버에 저장될지 mongoDB에 저장될지 결정 되는게 너무 신기하당.. store 옵션 지우면 재시작 할 때마다 메모리 지워짐!!)
 
 
 
