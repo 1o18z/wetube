@@ -155,4 +155,35 @@ export const postEdit = async(req, res) =>{
   return res.redirect("/users/edit");
 }
 
+export const getChangePassword = (req, res) => {
+  if(req.session.user.socialOnly === true){
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", {pageTitle: "Change Password"});
+}
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: {_id},
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById({_id});  // 이걸 여기에 넣어서 
+  const ok = await bcrypt.compare(oldPassword, user.password);  // password를 user.password로 해서 갱신될 때마다의 패스워드를 user.password로 (session도 업데이트 해줘야 함(아니면 비번 바껴도 자꾸 session이랑 초기 비번 비교해서 갱신 안됨!)
+  if(!ok){
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The current password is incorrect"
+    });
+  }
+  if(newPassword !== newPasswordConfirmation){
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "The password does not match the confirmation",
+    });
+  }
+  user.password = newPassword;
+  await user.save();  // user.save()하면 pre save 작동(새로운 비밀번호 hash하기 위해)
+  return res.redirect("/users/logout");
+}
 export const see = (req, res) => res.send("See User");
