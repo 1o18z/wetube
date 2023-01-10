@@ -132,5 +132,27 @@ export const logout = (req, res) => {
   req.session.destroy();  // 세션 삭제
   return res.redirect("/");
 };
-export const edit = (req, res) => res.send("Edit User");
+
+export const getEdit = (req, res) =>{
+  return res.render("editProfile", {pageTitle:"Edit Profile"});
+}
+export const postEdit = async(req, res) =>{
+  const {
+    session: {
+      user: {_id},
+    },
+    body: {
+      name, email, username, location
+    },
+  } = req;
+  const updateUser = await User.findByIdAndUpdate(_id, {
+    name, email, username, location, 
+  });
+  req.session.user = {
+    ...req.session.user,  // req.session.user 안에 있는 내용 전해주는 것
+  name, email, username, location, 
+  };
+  return res.redirect("/users/edit");
+}
+
 export const see = (req, res) => res.send("See User");

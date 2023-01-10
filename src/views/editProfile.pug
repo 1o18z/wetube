@@ -1,0 +1,12 @@
+extends base
+
+
+block content
+    //- action 안 쓰면 브라우저가 같은 url에 post request를 보내려는 걸 앎
+    form(method="POST")
+        input(placeholder="Name", name="name", type="text", required, value=loggedInUser.name)
+        input(placeholder="Email", name="email", type="email", required, value=loggedInUser.email)
+        input(placeholder="Username", name="username", type="text", required, value=loggedInUser.username)
+        input(placeholder="Location", name="location", type="text", required, value=loggedInUser.location)
+        input(type="submit", value="Update Profile")
+    //- loggedInUser도 user다 (= user model에 있는 모든 걸 template에서 사용 가능하다는 뜻)
