@@ -30,6 +30,7 @@ app.use(
 );
 
 app.use(localsMiddleware);  // session 전에 오면 session 나타나지 X
+app.use("/uploads", express.static("uploads")); 
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);

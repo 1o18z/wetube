@@ -133,50 +133,57 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 
-export const getEdit = (req, res) =>{
-  return res.render("editProfile", {pageTitle:"Edit Profile"});
+export const getEdit = (req, res) => {
+  return res.render("editProfile", { pageTitle: "Edit Profile" });
 }
-export const postEdit = async(req, res) =>{
+export const postEdit = async (req, res) => {
   const {
     session: {
-      user: {_id},
+      user: { _id, avatarUrl },
     },
-    body: {
-      name, email, username, location
-    },
+    body: { name, email, username, location },
+    file,
+    // file: { path }, // 이렇게 하면 안됨!! 파일을 안 올리면 req 안의 file은 undefined가 되버림
   } = req;
-  const updateUser = await User.findByIdAndUpdate(_id, {
-    name, email, username, location, 
-  });
-  req.session.user = {
-    ...req.session.user,  // req.session.user 안에 있는 내용 전해주는 것
-  name, email, username, location, 
-  };
+  console.log(file);
+  const updateUser = await User.findByIdAndUpdate(_id,
+    {
+      // avatarUrl:file.path, // file이 undefined면 이거 사용 불가(빈 내용이니까)
+      avatarUrl: file ? file.path :avatarUrl, // file 있으면 file.path, 없으면 avatarUrl 유지
+      name, 
+      email, 
+      username, 
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updateUser;
+
   return res.redirect("/users/edit");
-}
+};
 
 export const getChangePassword = (req, res) => {
-  if(req.session.user.socialOnly === true){
+  if (req.session.user.socialOnly === true) {
     return res.redirect("/");
   }
-  return res.render("users/change-password", {pageTitle: "Change Password"});
+  return res.render("users/change-password", { pageTitle: "Change Password" });
 }
 export const postChangePassword = async (req, res) => {
   const {
     session: {
-      user: {_id},
+      user: { _id },
     },
     body: { oldPassword, newPassword, newPasswordConfirmation },
   } = req;
-  const user = await User.findById({_id});  // 이걸 여기에 넣어서 
+  const user = await User.findById({ _id });  // 이걸 여기에 넣어서 
   const ok = await bcrypt.compare(oldPassword, user.password);  // password를 user.password로 해서 갱신될 때마다의 패스워드를 user.password로 (session도 업데이트 해줘야 함(아니면 비번 바껴도 자꾸 session이랑 초기 비번 비교해서 갱신 안됨!)
-  if(!ok){
+  if (!ok) {
     return res.status(400).render("users/change-password", {
       pageTitle: "Change Password",
       errorMessage: "The current password is incorrect"
     });
   }
-  if(newPassword !== newPasswordConfirmation){
+  if (newPassword !== newPasswordConfirmation) {
     return res.status(400).render("users/change-password", {
       pageTitle: "Change Password",
       errorMessage: "The password does not match the confirmation",

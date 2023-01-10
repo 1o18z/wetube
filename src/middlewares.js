@@ -1,3 +1,5 @@
+import multer from "multer";
+
 export const localsMiddleware = (req, res, next) => {
     res.locals.loggedIn = Boolean(req.session.loggedIn);
     // loggedIn이 false나 undefined가 될 수도 있으니까 boolean으로 확인
@@ -27,4 +29,4 @@ export const localsMiddleware = (req, res, next) => {
   };
 
 
-
+export const uploadFiles = multer({dest:"uploads/"}); // 사용자가 보낸 파일을 uploads 폴더에 저장하도록 설정

@@ -1,3 +1,4 @@
 /node_modules
 # 이 페이지에 쓰는 것들은 깃허브에 업로드 하지 않도록 하는 것
 .env
+/uploads
