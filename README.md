@@ -374,3 +374,20 @@ userRouter.route("/edit")
 ‣ 폴더 전체를 브라우저에게 노출 시킨다는 의미이다.  
 -> app.use("/주소", express.static("오픈할 폴더 이름")); 
 
+### • ObjectId  
+‣ mongoose에서만 가능한 타입  
+-> models/Video.js에서 쓰기 위해 owner에 type: mongoose.Schema.Types.ObjectId로 작성  
+-> 여기서 ObjectId는 db.videos.find({})로 나오는 owner의 타입으로, video와 user를 연결시키기 위해 사용  
+(video에 user(owner) 정보 넣기 위해)  
+
+-> owner에 reference 추가 : 위 object ID가 model user에서 온다고 알려주는 것  
+=> ref: "User"  
+-> 여기서 User는 models/User.js의 User  
+
+### • populate  
+‣ videoController.js의 watch의 Video.findeById에 populate("owner")을 추가했더니, video의 owner가 user의 id만이 아닌 user의 모든 정보를 보여준다.  
+(mongoose가 video를 찾고, 그 안에서 owner도 찾음)  
+-> mongoose는 owner가 object ID인걸 알고, id가 User에서 온 걸 알고있음  
+=> populate로 여러 줄의 코드를 한 줄로 줄여버림!! mongoose relationship!! 짱
+
+
