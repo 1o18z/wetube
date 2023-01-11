@@ -1,6 +1,7 @@
 extends base.pug
 
 block content 
+        video(src="/" + video.fileUrl, controls)
         //- h2 #{video.views}
         div
                 p=video.description

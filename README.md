@@ -350,7 +350,8 @@ ex) {"coord":{"lon":139.01,"lat":35.02},"weather":[{"id":800,"main":"Clear","des
 ### • Multer    
 ‣ 우리가 파일을 업로드할 수 있게 해준다.  
 -> editProfile.pug의 form에 enctype="multipart/form-data"추가  
-(= 우리 form이 다르게 encode될 거란 의미)  
+(= 우리 form이 다르게 encode될 거란 의미.  
+써주지 않으면 multer 제대로 작동 놉!)  
 => 이게 파일을 백엔드로 보내기 위해 필요한 encoding type(enctype) 
 
 ‣ userRouter.js
