@@ -22,7 +22,7 @@ userRouter.route("/edit")
   
 userRouter.get("/github/start", publicOnlyMiddleware, startGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, finishGithubLogin);
-userRouter.get(":id", see);
+userRouter.get("/:id", see);
 export default userRouter;
 
 // 두 가지 routes를 만드세요: /와 /read OK
