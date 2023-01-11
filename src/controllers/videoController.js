@@ -46,26 +46,22 @@ export const getUpload = (req, res) => {
 
 export const postUpload = async (req, res) => {
 
-  // const {
-  //   body:
-  //     {title, description, hashtags},
-  //   file:
-  //     file,
-  //   session: user._id
-  // } = req;
   const {
     user: {_id},
 } = req.session; // session에서 user 가져오고 그 user에서 _id 가져옴
   const file = req.file;  // multer은 req.file을 제공해주고, file 안에는 path가 있음
   const { title, description, hashtags } = req.body;
   try {
-    await Video.create({
+    const newVideo = await Video.create({
       title,
       description,
       fileUrl:file.path,
       owner: _id,
       hashtags: Video.formatHashtags(hashtags),
     });
+    const user = await User.findById(_id);
+    user.videos.push(newVideo._id);
+    user.save();
     return res.redirect("/");
   } catch (error) {
     return res.status(400).render("upload", {

@@ -1,7 +1,8 @@
 extends ../base
 
 block content
-    each video in videos 
+    each video in user.videos 
+        //- videos가 아닌 user.videos인 이유 -> userController.js에서 user를 users/profile로 보내고 있어서
         +video(video)
     else    
         Sorry. nothing found
