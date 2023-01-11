@@ -388,6 +388,22 @@ userRouter.route("/edit")
 ‣ videoController.js의 watch의 Video.findeById에 populate("owner")을 추가했더니, video의 owner가 user의 id만이 아닌 user의 모든 정보를 보여준다.  
 (mongoose가 video를 찾고, 그 안에서 owner도 찾음)  
 -> mongoose는 owner가 object ID인걸 알고, id가 User에서 온 걸 알고있음  
-=> populate로 여러 줄의 코드를 한 줄로 줄여버림!! mongoose relationship!! 짱
+=> populate로 여러 줄의 코드를 한 줄로 줄여버림!! mongoose relationship!! 짱  
+
+### • isModified
+-> video를 upload하면 save()가 실행되어 비밀번호를 hash함  
+(이미 hash가 되어있는 password를 또 hash함   
+-> 그래서 video 업로드한 후 로그아웃하고 다시 로그인하면 로그인이 안됨!)  
+-> User.js에 if(this.isModified("password")) 조건 추가해서 password가 변경될 때만 hash되도록 함  
+=> 이거로 문제 하나 해결!  
+
+### • 문제 해결
+-> video 수정과 삭제를 video 올린 user만 가능하게 하고싶음!  
+-> videoController.js의 getEdit에 로그인한 user id와 video 업로드한 owner가 같아야 한다는 조건문 추가  
+-> 조건문은 실행 되지만 user id와 owner가 같은데도 else문이 실행 되어버림  
+-> 콘솔 찍어보면 두 개가 타입이 다르다는 걸 확인 가능 (owner은 object인데 user if는 string)  
+-> 그래서 String으로 둘 다 감싸줘서 string으로 만듦   
+-> 이거로 문제 둘 해결!! (postEdit과 deleteVideo에도 추가함)  
+=> 여기에는 populate 추가 안 한 이유 : 모든 user 정보가 필요하지 않고 id만 필요해서  
 
 
