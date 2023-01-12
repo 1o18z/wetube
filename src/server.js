@@ -31,6 +31,7 @@ app.use(
 
 app.use(localsMiddleware);  // session 전에 오면 session 나타나지 X
 app.use("/uploads", express.static("uploads")); 
+app.use("/static", express.static("assets")); // 유저들에게 assets 폴더를 /static 주소 통해 공개하겠다는 것
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);

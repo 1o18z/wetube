@@ -8,7 +8,8 @@
     "url": "git+https://github.com/1o18z/wetube.git"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/init.js"
+    "dev:server": "nodemon --exec babel-node src/init.js",
+    "dev:assets": "webpack --config webpack.config.js"
   },
   "author": "eunji<qkrdmswl1018@naver.com>",
   "license": "MIT",
@@ -33,6 +34,14 @@
     "@babel/core": "^7.20.5",
     "@babel/node": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
-    "nodemon": "^2.0.20"
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "mini-css-extract-plugin": "^2.7.2",
+    "nodemon": "^2.0.20",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }

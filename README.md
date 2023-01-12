@@ -407,3 +407,70 @@ userRouter.route("/edit")
 => 여기에는 populate 추가 안 한 이유 : 모든 user 정보가 필요하지 않고 id만 필요해서  
 
 
+### • webpack  
+``` npm i webpack webpack-cli -D```  
+‣ webpack에는 소스 파일들이 있고, 우리 파일들을 바꿔준다.  
+ex) JS를 옛날 JS 코드로 바꿔줌  
+‣ 대부분의 프레임워크들은 자체 webpack 설정이 내제되어 있어서 웬만하면 webpack 다룰 일 거의 아예 없을 거!!
+
+‣ entry : 우리가 처리하고자 (변경하고자) 하는 파일들  
+‣ output: 결과물  
+‣ filename : 우리 결과물이 될 파일 이름  
+‣ path: 우리 결과물이 저장될 경로 (절대경로여야 함!)  
+‣ watch : 변경사항 발생해도 자동으로 refresh, compile 해줌!  
+(매번 assets 파일 삭제하고 npm run assets 실행하는 번거로움 해결)   
+-> 이게 의미하는 건 콘솔은 꼭 동시에 두 개 실행해야 한다는 것!! (backend n frontend)  
+‣ clean : true하면 ouput 폴더를 build 전에 clean 해줌
+
+### • rules  
+‣ 우리가 각각의 파일 종류에 따라 어떤 전환을 할건지 결정하는 것
+
+### • webpack.config.js 
+‣ 모든 webpack.config.js 파일은 동일한 구조 가짐  
+-> 여기까지는 완벽히 이해하고 있어야 함  
+```
+module.exports = {
+    entry: "./src/client/js/main.js", 
+    output: {
+        filename: "main.js",
+        path: path.resolve(__dirname, "assets", "js"),  
+    },
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: {}]],
+                    },
+                },
+            },
+        ],
+    },
+};
+```
+=> 이 파일이 하는 일은 entry의 파일을 가지고 코드에 따라 변형  
+-> webpack이 어떻게 처리할지 알려줘야 하는데, 그걸 rule에서 처리    
+
+### • MiniCssExtractPlugin  
+‣ 해당 코드를 다른 파일로 분리시켜준다.  
+( css를 추출해서 별도의 파일로 만들어줌 )  
+‣ output의 path에 따라 파일의 저장위치가 저장된다.  
+
+
+### • 문제 해결  
+-> webpack.config.js에 watch: true 추가해서 npm run assets (프론트)이 자동으로 refresh, compile되게 해줬는데, 백엔드도 같이 재시작 되어버림!  
+(nodemon이 파일을 저장하는 줄 알고 재시작하는 거!!)   
+-> 해결 방법 두 가지 있음
+1. package.json에 명령문을 작성해서 실행하는 것
+2. 설정파일을 생성하는 것  
+-> 1번은 너무 길어질 것 같으니 2번 채택  
+-> nodemon.json 파일 생성해서 아래 코드 추가
+```
+  "ignore": ["webpack.config.js", "src/client/*", "assets/*],
+  "exec": "babel-node src/init.js"
+```
+-> package.json의 scripts: dev를 nodemon만 호출하도록 변경  
+(= nodemon이 자동적으로 nodemon.json을 호출)  
+=> 해결!!  
+
+(package.json의 scripts: assets도 webpack만 써도 잘 작동함!  
+-> webpack.config.js파일이 webpack 실행될 때 기본적으로 찾는 설정파일이라)
