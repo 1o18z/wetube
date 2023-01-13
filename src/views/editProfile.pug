@@ -4,8 +4,7 @@ extends base
 block content
     //- action 안 쓰면 브라우저가 같은 url에 post request를 보내려는 걸 앎
         //- loggedInUser도 user다 (= user model에 있는 모든 걸 template에서 사용 가능하다는 뜻)
-    img(src="/"+loggedInUser.avatarUrl, width="100", height="100")
-    form(method="POST", enctype="multipart/form-data")
+    form(method="POST", enctype="multipart/form-data").editProfile__form
         label(for="avatar") Avatar
         input(type="file", id="avatar", name="avatar", accept="image/*")
         input(placeholder="Name", name="name", type="text", required, value=loggedInUser.name)
@@ -14,5 +13,5 @@ block content
         input(placeholder="Location", name="location", type="text", required, value=loggedInUser.location)
         input(type="submit", value="Update Profile")
         if !loggedInUser.socialOnly
-            hr
+            div.editProfile__password
             a(href="change-password") Change Password &rarr;

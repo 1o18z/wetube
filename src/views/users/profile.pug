@@ -1,8 +1,15 @@
-extends ../base
+13 lines (11 sloc)  283 Bytes
+ extends ../base
+include ../mixins/video
+
 
 block content
-    each video in user.videos 
-        //- videos가 아닌 user.videos인 이유 -> userController.js에서 user를 users/profile로 보내고 있어서
-        +video(video)
-    else    
-        Sorry. nothing found
+    div.profile__data
+        img(src="/" + user.avatarUrl).avatar
+        h3=user.name
+    div.video-grid
+        each video in user.videos
+            //- videos가 아닌 user.videos인 이유 -> userController.js에서 user를 users/profile로 보내고 있어서
+            +video(video)
+        else
+            span.empty__message No videos found
