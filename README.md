@@ -473,4 +473,20 @@ module.exports = {
 => 해결!!  
 
 (package.json의 scripts: assets도 webpack만 써도 잘 작동함!  
--> webpack.config.js파일이 webpack 실행될 때 기본적으로 찾는 설정파일이라)
+-> webpack.config.js파일이 webpack 실행될 때 기본적으로 찾는 설정파일이라)  
+
+### • 코멘트  
+‣ // 이거는 소스코드에서 볼 수 있음  
+(이 코멘트는 pug에서 코멘트 처리되어 html코멘트로 바뀜)  
+-> 모든 사람에게 보여짐  
+(=> 브라우저에서는 보이지 않지만 웹사이트를 inspect하면 볼 수 있음)
+‣ //- 이거는 프론트엔드에서 볼 수 없음  
+-> pug 파일에 액세스를 가지고 있는 사람에게 보여짐 
+
+### • pause  
+‣ 이벤트 리스너 중 하나로, 정지시키는 거  
+(play도 있음)  
+
+### • metadata (video object의 event)  
+‣ video 빼고 모든 것  
+-> 비디오의 소리, 가로세로 크기, 등 움지이는 이미지를 제외한 모든 것

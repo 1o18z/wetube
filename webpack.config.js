@@ -3,14 +3,17 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require("path");
 // console.log(path.resolve(__dirname, "assets", "js"));
 module.exports = {
-    entry: "./src/client/js/main.js", 
+    entry: {
+        main : "./src/client/js/main.js", 
+        videoPlayer: "./src/client/js/videoPlayer.js"
+    },
     plugins: [new MiniCssExtractPlugin({
         filename: "css/styles.css",
     })],
     mode: "development",
     watch: true,    // refresh와 compile 다시 해줌!
     output: {
-        filename: "js/main.js",
+        filename: "js/[name].js",   // [name]이라고 적으면 위 entry에 있는 이름 가져옴
         path: path.resolve(__dirname, "assets"),    // 작업이 끝난 후에 파일을 저장할 디렉토리
         clean: true,    // ouput 폴더를 build 전에 clean 해줌
     },
