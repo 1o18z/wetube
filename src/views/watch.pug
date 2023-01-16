@@ -9,7 +9,8 @@ block content
                 div
                         span#currentTime 00:00 
                         span /  
-                        span#totalTime 00:00 
+                        span#totalTime 00:00:00
+                input(type="range", step="1", value="0", min="0")#timeline
         //-
                 div
                         p=video.description
