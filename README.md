@@ -489,4 +489,25 @@ module.exports = {
 
 ### • metadata (video object의 event)  
 ‣ video 빼고 모든 것  
--> 비디오의 소리, 가로세로 크기, 등 움지이는 이미지를 제외한 모든 것
+-> 비디오의 소리, 가로세로 크기, 등 움직이는 이미지를 제외한 모든 것  
+
+### • API
+‣ 프론트엔드와 백엔드가 서버를 통해 통신하는 방법  
+
+### • data Attribute  
+‣ data-로 시작하는 속성  
+-> 어떤 것이든 저장 가능 (HTML specification과도 문제 X)  
+‣ 자바스크립트 데이터에 쉽게 접근 가능  
+‣ HTML element 저장 가능  
+
+### • 문제 해결  
+-> video 끝났을 때 fetch 이용해 백엔드에 요청 보내는데 게속 pending으로 뜸 (server랑 Controller, Router 다 작성함!)  
+-> 이유 : return res.status(404); 이렇게만 써서 (응답에 상태 코드를 추가만 해서 아무것도 return 하지 않음)   
+-> status 대신 sendStatus사용  
+(return res.sendStatus(404);)   
+이렇게 해야 연결 끝낼 수 있음!  
+-> status 200 받음 해결!! 
+
+### • status()과 sendStatus() 
+‣ status() : render()하기 전에 상태 코드를 정할 수 있는 것  
+‣ sendStatus() : 상태 코드를 보내고 연결을 끝내는 것
