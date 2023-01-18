@@ -510,4 +510,13 @@ module.exports = {
 
 ### • status()과 sendStatus() 
 ‣ status() : render()하기 전에 상태 코드를 정할 수 있는 것  
-‣ sendStatus() : 상태 코드를 보내고 연결을 끝내는 것
+‣ sendStatus() : 상태 코드를 보내고 연결을 끝내는 것  
+
+### • MediaRecorder  
+‣ 비디오든 오디오든 녹화하고 싶은 모든 걸 녹화  
+‣ dataavailable event : 저장된 데이터의 최종 video 담음  
+‣ stream : 우리가 어딘가에 넣어둘 0과 1로 이루어진 데이터를 의미  
+‣ createObjectURL : 파일을 미리보거나 보고 싶을 때에는 해당 URL이 필요해서, 이걸 통해 video에 접근  
+-> 웹사이트 상에 존재하는 URL처럼 보이지만 실제로는 X  
+-> 단순히 브라우저의 메모리만 가리킴(파일 가리키는 URL). 백엔드에 없고, 껐다 키면 증발  
+
