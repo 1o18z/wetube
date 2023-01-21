@@ -540,4 +540,15 @@ module.exports = {
 npm install @ffmpeg/ffmpeg @ffmpeg/core
 ```
 
+### • ArrayBuffer  
+‣ ArrayBuffer은 raw binary data를 나타내는 object  
+=> 우리 영상을 나타내는 bytes의 배열  
+‣ Unit8Array로부터 blob을 만들 수는 없지만 ArrayBuffer로는 만들 수 있음  
+-> mp4File을 콘솔에 찍어보면 엄청 긴 숫자 배열들이 나옴 (이 배열들은 실제 파일(videoFile) 나타냄!!)  
+-> 이 배열의 raw data, 즉 binary data에 접근하려면 mp4File.buffer을 사용해야 함  
+‣ buffer : ArrayBuffer을 반환   
+‣ blob은 배열 안에 배열들을 받을 수 있음  
+(-> recorder.js에서 handleStart 함수의 createObjectURL(event.data)로 생긴 data가 blob임!)
+
+
 
