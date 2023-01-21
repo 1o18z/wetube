@@ -18,6 +18,9 @@ videoRouter.route("/:id([0-9a-f]{24})/delete").all(protectorMiddleware).get(dele
 videoRouter.route("/upload")
 .all(protectorMiddleware)
 .get(getUpload)
-.post(videoUpload.single("video"), postUpload);
+.post(videoUpload.fields([
+  {name: "video"}, 
+  {name: "thumb"}
+]), postUpload);
                                                                                         // upload.pug의 file을 받는 input의 이름        
 export default videoRouter;
