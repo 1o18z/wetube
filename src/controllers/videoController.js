@@ -43,7 +43,7 @@ export const postEdit = async (req, res) => {
   if (String(video.owner) !== String(_id)) {  // video 올린 user의 id(owner)와 로그인한 user의 id가 같지 않으면
     return res.status(403).redirect("/");
   }
-  await Video.findByIdAndUpdate(id, {
+  await Video.findOneAndUpdate(id, {
     title,
     description,
     hashtags: Video.formatHashtags(hashtags),
@@ -60,7 +60,7 @@ export const postUpload = async (req, res) => {
   const {
     user: { _id },
   } = req.session; // session에서 user 가져오고 그 user에서 _id 가져옴
-  const {video, thumb} = req.file;  // multer은 req.file을 제공해주고, file 안에는 path가 있음
+  const {video, thumb} = req.files;  // multer은 req.file을 제공해주고, file 안에는 path가 있음
   const { title, description, hashtags } = req.body;
   try {
     const newVideo = await Video.create({
@@ -93,7 +93,7 @@ export const deleteVideo = async (req, res) => {
   if (String(video.owner) !== String(_id)) {  // video 올린 user의 id(owner)와 로그인한 user의 id가 같지 않으면
     return res.status(403).redirect("/");
   }
-  await Video.findByIdAndDelete(id);
+  await Video.findOneAndDelete(id);
   return res.redirect("/");
 };
 
