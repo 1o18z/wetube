@@ -555,5 +555,14 @@ npm install @ffmpeg/ffmpeg @ffmpeg/core
 ‣ 이 메시지는 session에 근거하기 때문에 한 사용자만 볼 수 있음  
 (redirect를 할 때 사용자에게 이유를 설명하고 싶으면 메시지 보낼 수 있음)  
 ‣ 일회성 메시지임!!  
-(=> flash 미들웨어는 messages라고 하는 locals를 사용할 수 있게 해줌)
+(=> flash 미들웨어는 messages라고 하는 locals를 사용할 수 있게 해줌)  
+
+### • JSON  
+‣ JSON.stringify({text: "i like it", rating: "5"})  
+-> "{/"text/":/"i like it/",'"rating/":/"5/"}"  
+(데이터를 받아서 string으로 바꿔줌)  
+‣ JSON.parse("{/"text/":/"i like it/",'"rating/":/"5/"}")    
+-> {text: "i like it", rating: "5"}  
+(backend에서는 이 string을 받아서 JS object로 바꿔줌)
+
   

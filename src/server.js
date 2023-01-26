@@ -20,6 +20,8 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());  // express는 우리가 text를 보낸다 생각함 -> json을 보낸다는 걸 알려줘야 함
+// => commentSection.js의 fetch의 headers에 Content-Type 추가해서 해결  
 
 app.use(
   session({

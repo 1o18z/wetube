@@ -123,3 +123,9 @@ export const registerView = async (req, res) => {
   await video.save();
   return res.status(200); // ok라는 뜻
 };
+
+export const createComment = (req, res) => {
+  console.log(req.params);
+  console.log(req.body);
+  return res.end();
+};
