@@ -11,6 +11,7 @@ import videoRouter from "./routers/videoRouter";
 import userRouter from "./routers/userRouter";
 import apiRouter from "./routers/apiRouter";
 import { localsMiddleware } from "./middlewares";
+import flash from "express-flash";
 
 const app = express();
 const logger = morgan("dev");
@@ -28,7 +29,7 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }), // session들을 MongoDB database에 저장
   })// 이 미들웨어가 사이트로 들어오는 모두를 기억
 );
-
+app.use(flash()); //
 app.use(localsMiddleware);  // session 전에 오면 session 나타나지 X
 app.use("/uploads", express.static("uploads")); 
 app.use("/static", express.static("assets")); // 유저들에게 assets 폴더를 /static 주소 통해 공개하겠다는 것

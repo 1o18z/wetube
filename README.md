@@ -550,5 +550,10 @@ npm install @ffmpeg/ffmpeg @ffmpeg/core
 ‣ blob은 배열 안에 배열들을 받을 수 있음  
 (-> recorder.js에서 handleStart 함수의 createObjectURL(event.data)로 생긴 data가 blob임!)
 
-
-
+### • express-flash  
+‣ 사용자에게 flash message를 남길 수 있게 해주는 middleware  
+‣ 이 메시지는 session에 근거하기 때문에 한 사용자만 볼 수 있음  
+(redirect를 할 때 사용자에게 이유를 설명하고 싶으면 메시지 보낼 수 있음)  
+‣ 일회성 메시지임!!  
+(=> flash 미들웨어는 messages라고 하는 locals를 사용할 수 있게 해줌)
+  
