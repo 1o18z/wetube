@@ -1,5 +1,4 @@
 extends base
-
 block content
         div#videoContainer(data-id=video._id)
                 video(src="/" + video.fileUrl)
@@ -18,27 +17,29 @@ block content
                                         i.fas.fa-volume-up
                         div
                                 span#fullScreen
-                                i.fas.fa-expand
+                                        i.fas.fa-expand
         div.video__data
                 p.video__title=video.title
                 small.video__owner Uploaded by 
                         a(href=`/users/${video.owner._id}`)=video.owner.name
                 small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-
-
-        div#bottomBtn
-                small#uploadUser Uploaded by 
-                        a(href=`/users/${video.owner._id}`)=video.owner.name
                 if String(video.owner._id) === String(loggedInUser._id)
-                        a.videoBtn#edBtn(href=`${video.id}/edit`) Edit Video &rarr;
+                        a(href=`${video.id}/edit`) Edit Video &rarr;
                         br
-                        a.videoBtn#dlBtn(href=`${video.id}/delete`) Delete Video &rarr;
-        if loggedIn 
-                div.video__comments
+                        a(href=`${video.id}/delete`) Delete Video &rarr;
+        if loggedIn
+                div.video__add-comments
                         form.video__comment-form#commentForm
-                                textarea(cols="30", rows="10", placeholder="Write a nice comment...")
-                        button Add Comment
+                                textarea(cols="30", rows="10", placeholder="Write a nice commment...")
+                                button Add Comment
+        div.video__comments
+                ul
+                        each comment in video.comments.reverse()
+                                li.video__comment(data-id=comment.id)
+                                        i.fas.fa-comment
+                                        span  #{comment.text}
+                                        span ❌
 block scripts
-    script(src="/static/js/videoPlayer.js") 
-    if loggedIn
-        script(src="/static/js/commentSection.js") 
+        script(src="/static/js/videoPlayer.js")
+        if loggedIn
+                script(src="/static/js/commentSection.js") 
