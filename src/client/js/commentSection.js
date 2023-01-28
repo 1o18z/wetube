@@ -7,11 +7,12 @@ const addComment = (text, id) => {
     newComment.dataset.id = id;
     newComment.className = "video__comment";
     const icon = document.createElement("i");
-    icon.className = "fas fa-comment";
+    icon.className = "fas fa-arrow-alt-circle-right";
     const span = document.createElement("span");
     span.innerText = ` ${text}`;
-    const span2 = document.createElement("span");
-    span2.innerText = "❌";
+    const span2 = document.createElement("i");
+    span2.className = "fas fa-broom";
+    span2.style.float="right";
     newComment.appendChild(icon);
     newComment.appendChild(span);
     newComment.appendChild(span2);

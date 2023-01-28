@@ -3,20 +3,25 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #000000f8;
+    box-shadow: 0 1px 5px white;
+
     .header__logo {
-      color: $red;
+      color: white;
       font-size: 38px;
+      text-shadow: 1px 1px 5px #fff0a7;
     }
     ul {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color:rgb(255, 243, 217);
       li {
         margin-left: 30px;
         font-size: 14px;
         font-weight: 600;
         text-transform: uppercase;
-      }
+       }
       i {
         font-size: 16px;
       }
@@ -31,5 +36,6 @@ header {
       width: 40px;
       height: 40px;
       border-radius: 50%;
+      border:3px solid rgb(255, 239, 176);
     }
   }

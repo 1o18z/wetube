@@ -2,34 +2,74 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    .video__title {
-      font-size: 26px;
-      margin-bottom: 5px;
-    }
     .video__createdAt {
-      font-size: 12px;
+        font-size: 12px;
+        position: absolute;
+        right: 380px;
+        bottom:40px;
     }
     .video__owner {
-      margin-bottom: 5px;
-      font-size: 14px;
-      a {
-        color: cornflowerblue;
-        text-decoration: underline;
-      }
+        margin-bottom: 5px;
+        font-size: 14px;
+        position: absolute;
+        right: 380px;
+        a {
+            color: #edbf64;
+            text-decoration: underline;
+        }
     }
-  }
-  .video__comments {
+}
+.video__add-comments{
+    width: 90%;
+    margin: 30px auto 0 auto;
+    text-align: center;
+    button{
+        background-color: rgb(255, 228, 120);
+        margin-left: 20px;
+        border-radius: 10px;
+        position: absolute;
+    }
+}
+.video__con{
+    height: 20px;
+    width: 130px;
+    background-color: rgba(255, 244, 174, 0.492);
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    box-shadow: 1px 1px 5px gray;
+}
+.video__comments {
+    background-color: transparent;
     display: flex;
     flex-direction: column;
-    max-width: 320px;
+    max-width: 620px;
     width: 100%;
     margin: 0 auto;
-    margin-top: 20px;
+    padding:10px;
     .video__comment {
-      padding: 10px;
-      border-radius: 9999px;
-      background-color: white;
-      color: black;
-      margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 9999px;
+        background-color: rgb(255, 255, 255);
+        color:rgb(78, 57, 40);
+        margin-bottom: 10px;
     }
-  }
+}
+#deleteComment{
+    float: right;
+    color:rgb(78, 57, 40);
+}
+
+textarea{
+    height: 20px;
+    width: 500px;
+    padding-left: 10px;
+}
+
+.video__title {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  text-align: center;
+  color:rgb(255, 224, 112);
+  -webkit-text-stroke: 0.5px black;
+}

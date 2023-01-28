@@ -40,6 +40,6 @@ export const avatarUpload = multer({
 export const videoUpload = multer({ 
   dest: "uploads/videos/",
   limits: {
-    fileSize: 10000000,
+    // fileSize: 10000000,
   }
 }); // 사용자가 보낸 파일을 uploads 폴더에 저장하도록 설정

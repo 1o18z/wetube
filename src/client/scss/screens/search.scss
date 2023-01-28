@@ -3,26 +3,24 @@
     display: flex;
     position: relative;
     align-items: center;
-    input {
+    #searchInput {
       all: unset;
       padding: 15px 20px;
       border-radius: 5px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background-color: black;
-      margin-bottom: 5px;
+      box-shadow: 1px 1px 6px rgb(191, 191, 191);
+      background-color: rgb(255, 255, 255);
       font-size: 16px;
-      color: white;
-      width: 90%;
+      color: rgb(26, 26, 26);
+      width: 450px;
+      margin: 0 auto 5px auto
     }
     button {
       all: unset;
-    }
-    button {
       position: absolute;
-      right: 15px;
+      right:250px;
       font-size: 18px;
       background-color: rgba(0, 0, 0, 0);
-      text-align: center;
+      // text-align: center;
       cursor: pointer;
     }
   }

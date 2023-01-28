@@ -1,5 +1,7 @@
 extends base
+include mixins/video
 block content
+        h1.video__title=video.title
         div#videoContainer(data-id=video._id)
                 video(src="/" + video.fileUrl)
                 div#videoControls.videoControls
@@ -18,15 +20,14 @@ block content
                         div
                                 span#fullScreen
                                         i.fas.fa-expand
+
         div.video__data
-                p.video__title=video.title
                 small.video__owner Uploaded by 
                         a(href=`/users/${video.owner._id}`)=video.owner.name
                 small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
                 if String(video.owner._id) === String(loggedInUser._id)
-                        a(href=`${video.id}/edit`) Edit Video &rarr;
-                        br
-                        a(href=`${video.id}/delete`) Delete Video &rarr;
+                        a(href=`${video.id}/edit`).video__con Edit Video &rarr;
+                        a(href=`${video.id}/delete`).video__con Delete Video &rarr;
         if loggedIn
                 div.video__add-comments
                         form.video__comment-form#commentForm
@@ -36,9 +37,10 @@ block content
                 ul
                         each comment in video.comments.reverse()
                                 li.video__comment(data-id=comment.id)
-                                        i.fas.fa-comment
+                                        i.fas.fa-arrow-alt-circle-right
                                         span  #{comment.text}
-                                        span ❌
+                                        span#deleteComment 
+                                                i.fas.fa-broom
 block scripts
         script(src="/static/js/videoPlayer.js")
         if loggedIn

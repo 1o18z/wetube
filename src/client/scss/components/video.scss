@@ -1,12 +1,20 @@
 .video-mixin {
+  // display: grid;
+  // grid-template-columns: 1fr 1fr 1fr;
   .video-mixin__thumb {
     height: 140px;
+    width: 250px;
     border-radius: 7px;
-    width: 100%;
+    box-shadow: 2px 2px 10px rgb(62, 62, 62);
     background-color: ivory;
+    border: 1px solid rgb(255, 255, 255);
+    background-size: cover;
+    // margin-left: 40px;
   }
   .video-mixin__data {
     padding: 0px 15px;
+    margin-bottom: 20px;
+    // margin-left: 40px;
     .video-mixin__title {
       font-size: 18px;
       display: block;
